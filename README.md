@@ -24,7 +24,7 @@ You can use this new functionality if you are using the Arduino-Pico (Raspberry 
 
 ### Where do I find the Arduino-Pico core?
 
-The [Arduino-Pico core respository is available on GitHub](https://github.com/earlephilhower/arduino-pico).
+The [Arduino-Pico core repository is available on GitHub](https://github.com/earlephilhower/arduino-pico).
 
 There is also a ton of documentation available, [including this installation guide](https://arduino-pico.readthedocs.io/en/latest/install.html#).
 
@@ -85,3 +85,10 @@ I have to admit that I don't have a non-WiFi Pico model, so I don't know how wel
 
 You will notice that the src directory has a pwm.ino file, in addition to the multicore_demo.ino.  This was prompted by the fact that the on-board LED on the Pico-W is not attached to an RP2040 GPIO pin, but to one of the wireless module's pins.  This means that it doesn't have PWM functionality and the normal `analogWrite()` call cannot be used.  The (crude) code in pwm.ino is just a very simple up/down fader using nothing more than on/off writes to the pin with some very short delays between them.  The calls to `delay()` are, of course, blocking, but as this is running solely on core-1, it does not impact the WiFi scan process, which runs concurrently on core-0.
 If nothing else, this does provide a real-life genuine example of the multitasking capability of the RP2040 (and yes, I know it's still a really crappy fader!).
+
+The pwm.ino code should work fine with an older, non-WiFi Pico, but if you have one of those boards and want to experiment, it is trivial to import the Arduino-Pico/libraries/rp2040/examples/Fade/Fade.ino example code into the multicore_demo.ino file and delete the extra pwm.ino code completely.  Obviously the resulting firmware will *not* work with a Pico-W if you make this change.
+
+
+### Who can I thank for this?
+
+The Arduino-Pico repository is owned and maintained by Earle F. Philhower (with additional contributors).  Earle added the `setup1()` & `loop1()` functionality on the 25th of April 2021 -- see (pull request #113)[https://github.com/earlephilhower/arduino-pico/pull/113].  So we owe Earle a debt of gratitude not just for easy multicore, but also for the Arduino-Pico core itself.  Let's hope that we see other people picking up this neat idea and that we see the spread of `setup1()`/`loop1()` to other Arduino cores soon.
