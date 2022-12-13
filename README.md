@@ -31,6 +31,7 @@ There is also a ton of documentation available, [including this installation gui
 
 ### Notes on the demo.
 
+
 #### How do I use it?
 
 First of all, you need to add your access-point SSID and password at the top of the src/multicore_demo.ino file.
@@ -75,6 +76,12 @@ Found 3 networks
                  Free_Range_Eggs  NONE 68:FF:B7:6A:69:AB  1  -88
 ---
 ```
+At this point everything goes back to waiting for further BOOTSEL events.
 
 
+#### Pico vs Pico-W hardware
 
+I have to admit that I don't have a non-WiFi Pico model, so I don't know how well (or badly) one will react to the request for a WiFi scan.  If it all falls over in a heap, then you can probably just completely remove the WiFi.h include and replace the WiFi scan with a simple message from core-0 instead.
+
+You will notice that the src directory has a pwm.ino file, in addition to the multicore_demo.ino.  This was prompted by the fact that the on-board LED on the Pico-W is not attached to an RP2040 GPIO pin, but to one of the wireless module's pins.  This means that it doesn't have PWM functionality and the normal `analogWrite()` call cannot be used.  The (crude) code in pwm.ino is just a very simple up/down fader using nothing more than on/off writes to the pin with some very short delays between them.  The calls to `delay()` are, of course, blocking, but as this is running solely on core-1, it does not impact the WiFi scan process, which runs concurrently on core-0.
+If nothing else, this does provide a real-life genuine example of the multitasking capability of the RP2040 (and yes, I know it's still a really crappy fader!).
