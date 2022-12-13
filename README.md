@@ -5,24 +5,8 @@ To use both cores on the RP2040 processor, you only need to know two function ca
 + setup1()
 + loop1()
 
-Yup, if the Arduino-Pico core comes across 
-```C
-setup1()
-```
-function call, it uses the code within that function to initialize core-1 of the processor.
+Yup, if the Arduino-Pico core comes across setup1() function call, it uses the code within that function to initialize core-1 of the processor.
 
-When it finds
-```C
-loop1()
-```
-it uses the code in there as the run-time code for core-1.
+When it finds loop1() it uses the code there as the application code specifically for core-1.
 
-As usual, the normal
-```C
-setup()
-```
-and
-```C
-loop()
-```
-function calls are used by core-0, which is the default behaviour for an Arduino application and effectively limits your Pico to being a single core processor.
+As usual, the normal setup() and loop() function calls are used by core-0, which is the default behaviour for an Arduino application and effectively limits your Pico to being a single core processor.
