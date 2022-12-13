@@ -13,7 +13,7 @@
  * the setup1() and loop1() functions control core-1.
  *
  * This demo uses core-1 to run the "Fader" demo on the board LED.
-
+ *
  * Meanwhile, core-0 runs the normal WiFi functions, as well as
  * WiFi scans for in-range networks.  The network scans are triggered
  * by the "BOOTSEL" button, which is monitored by core-1.
