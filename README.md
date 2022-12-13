@@ -39,9 +39,8 @@ Using whatever system you prefer (PlatformIO, Arduino IDE, etc), compile the cod
 + The board will normally reset and run the new firmware on completion of the upload.
 + Once the board starts to initialize, the on-board LED will come on for 5-seconds.
   - This delay is to allow you time to connect your terminal program (screen, putty, etc) via USB.
-+ At the end of the 5-second delay, the demo will start to display start-up messages from core-0.
++ At the end of the 5-second delay, the demo will begin to display start-up messages from core-0.
 ```
-
          === Multicore Demo ===
 
 Core-0: On-Line.
@@ -54,5 +53,28 @@ Core-1: On-Line.
  ==>> Push BOOTSEL button to trigger WiFi scan.
 ```
   - Note that core-1 doesn't come on-line at the same time as core-0.  We use a delay at the start of `setup1()` to ensure that the WiFi can initialize, first.
++ The initial start-up messages end with the instruction to push the BOOTSEL button.
+
+The BOOTSEL button is actually monitored by core-1.   If you push and release BOOTSEL, the core-1 handler will load a fifo to signal core-0 that it should begin a WiFi network scan.
+
+Core-0 also loads a fifo to notify core-1 that it should run a simple fade-up/fade-down sequence on the on-board LED.  So, while core-0 is running the WiFi scan, core-1 is concurrently running the LED fader.
+
+```
+Core-1: Registered button press...
+
+Core-0: Initiating WiFi scan...
+
+Core-1: Received a start-fader command...
+
+Beginning scan at 1630368
+Found 3 networks
+
+                            SSID   ENC     BSSID         CH RSSI
+                  Buffalo-A-6928  AUTO 18:C2:FB:18:D1:16  7  -97
+                    AccessPoint1  WPA2 30:5A:A3:C7:82:10  6  -54
+                 Free_Range_Eggs  NONE 68:FF:B7:6A:69:AB  1  -88
+---
+```
+
 
 
