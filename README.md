@@ -32,6 +32,8 @@ The [Arduino-Pico core repository is available on GitHub](https://github.com/ear
 
 There is also a ton of documentation available, [including this installation guide](https://arduino-pico.readthedocs.io/en/latest/install.html#).
 
+The document [specific to this, multicore funtionality is here](https://arduino-pico.readthedocs.io/en/latest/multicore.html), including details on FIFO usage.
+
 
 ### Notes on the demo.
 
@@ -95,4 +97,4 @@ The pwm.ino code should work fine with an older, non-WiFi Pico, but if you have 
 
 ### Who can I thank for this?
 
-The Arduino-Pico repository is owned and maintained by Earle F. Philhower (with additional contributors).  Earle added the `setup1()` & `loop1()` functionality on the 25th of April 2021 -- see (pull request #113)[https://github.com/earlephilhower/arduino-pico/pull/113].  So we owe Earle a debt of gratitude not just for easy multicore, but also for the Arduino-Pico core itself.  Let's hope that we see other people picking up this neat idea and that we see the spread of `setup1()`/`loop1()` to other Arduino cores soon.
+The Arduino-Pico repository is owned and maintained by Earle F. Philhower (with additional contributors).  Earle added the `setup1()` & `loop1()` functionality on the 25th of April 2021 -- see [pull request #113](https://github.com/earlephilhower/arduino-pico/pull/113).  So we owe Earle a debt of gratitude not just for easy multicore, but also for the Arduino-Pico core itself.  Let's hope that we see other people picking up this neat idea and that we see the spread of `setup1()`/`loop1()` to other Arduino cores soon.
