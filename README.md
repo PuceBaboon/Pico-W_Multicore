@@ -1,6 +1,10 @@
 # Pico-W_Multicore
 
-This is a demonstration of the use of the Arduino-Pico (Raspberry Pi Pico Arduino core) super-simple multicore implementation.
+This is a demonstration of the use of the Arduino-Pico (Raspberry Pi Pico Arduino core), super-simple, multicore implementation.
+
+The Pico-W will run a WiFi scan on core-0 while simultaneously running a simple LED up/down fader on core-1.
+
+The two cores use an Arduino-Pico provided, multicore-safe FIFO to communicate between themselves.
 
 
 ### What's the secret?
