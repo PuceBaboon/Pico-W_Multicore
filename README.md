@@ -7,7 +7,7 @@ The Pico-W will run a WiFi scan on core-0 while simultaneously running a simple 
 The two cores use an Arduino-Pico provided, multicore-safe FIFO to communicate between themselves.
 
 
-### What's the secret?
+## What's the secret?
 
 To use both cores on the RP2040 processor, you only need to know two function calls:-
 + `setup1()`
